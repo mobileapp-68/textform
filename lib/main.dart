@@ -12,22 +12,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("Text Form")),
-        body: Form1(),
+        body: TextFieldInForm(),
       ),
     );
   }
 }
 
-class Form1 extends StatefulWidget {
-  const Form1({super.key});
+class TextFieldInForm extends StatefulWidget {
+  const TextFieldInForm({super.key});
 
   @override
-  State<Form1> createState() => _Form1State();
+  State<TextFieldInForm> createState() => _TextFieldInFormState();
 }
 
-class _Form1State extends State<Form1> {
+class _TextFieldInFormState extends State<TextFieldInForm> {
   String _textInput = "";
   final _textController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -52,9 +53,24 @@ class _Form1State extends State<Form1> {
       child: Column(
         spacing: 8,
         children: [
-          TextField(
-            decoration: const InputDecoration(labelText: "Input Your Name"),
-            controller: _textController,
+          Form(
+            key: _formKey,
+            child: TextFormField(
+              decoration: const InputDecoration(labelText: "Input Your Name"),
+              controller: _textController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _formKey.currentState!.validate();
+            },
+            child: Text("Submit"),
           ),
 
           ElevatedButton(

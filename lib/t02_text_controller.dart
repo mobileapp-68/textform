@@ -12,20 +12,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("Text Form")),
-        body: Form1(),
+        body: TextFieldWithController(),
       ),
     );
   }
 }
 
-class Form1 extends StatefulWidget {
-  const Form1({super.key});
+class TextFieldWithController extends StatefulWidget {
+  const TextFieldWithController({super.key});
 
   @override
-  State<Form1> createState() => _Form1State();
+  State<TextFieldWithController> createState() =>
+      _TextFieldWithControllerState();
 }
 
-class _Form1State extends State<Form1> {
+class _TextFieldWithControllerState extends State<TextFieldWithController> {
   String _textInput = "";
   final _textController = TextEditingController();
 
