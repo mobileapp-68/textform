@@ -27,7 +27,23 @@ class Form1 extends StatefulWidget {
 
 class _Form1State extends State<Form1> {
   String _textInput = "";
-  final textController = TextEditingController();
+  final _textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _textController.addListener(() {
+      setState(() {
+        _textInput = _textController.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +54,12 @@ class _Form1State extends State<Form1> {
         children: [
           TextField(
             decoration: const InputDecoration(labelText: "Input Your Name"),
-            controller: textController,
-            onChanged: (value) => {
-              setState(() {
-                _textInput = textController.text;
-              }),
-            },
+            controller: _textController,
           ),
 
           ElevatedButton(
             onPressed: () {
-              textController.clear();
+              _textController.clear();
               setState(() {
                 _textInput = "";
               });
