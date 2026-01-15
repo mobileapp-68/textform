@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,10 +29,6 @@ class MyForm extends StatefulWidget {
 
 class _MyFormState extends State<MyForm> {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
-  // final GlobalKey<FormBuilderFieldState> _firstnameKey =
-  //     GlobalKey<FormBuilderFieldState>();
-  // final GlobalKey<FormBuilderFieldState> _lastnameKey =
-  //     GlobalKey<FormBuilderFieldState>();
   String _firstname = "";
   String _lastname = "";
 
@@ -54,7 +49,6 @@ class _MyFormState extends State<MyForm> {
             child: Column(
               children: [
                 FormBuilderTextField(
-                  // key: _firstnameKey,
                   name: "firstname",
                   decoration: const InputDecoration(labelText: "Firstname"),
                   onChanged: (value) => setState(() {
@@ -66,7 +60,6 @@ class _MyFormState extends State<MyForm> {
                   ]),
                 ),
                 FormBuilderTextField(
-                  // key: _lastnameKey,
                   name: "lastname",
                   decoration: const InputDecoration(labelText: "Lastname"),
                   onChanged: (value) => setState(() {
