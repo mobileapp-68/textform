@@ -141,14 +141,7 @@ This clears both the state variables, which resets the text fields and the displ
 
 ---
 
-## Summary of Changes
+## What I don't like
 
-| Change                                     | Purpose                           |
-| ------------------------------------------ | --------------------------------- |
-| Add `_firstname` and `_lastname` variables | Store user input                  |
-| Update title Text to show values           | Display live input                |
-| Add `onChanged` to both TextFields         | Capture user input                |
-| Add Submit button validation               | Ensure required fields are filled |
-| Add Clear button logic                     | Reset the form                    |
-
-The result is a functional form that displays entered values in real-time, validates input, and provides clear and submit actions.
+- When you clear the text, the state updates, but the TextField widgets do not visually clear. This can be confusing for users.
+- The validation logic is located in the button's onPressed callback, not the TextField itself.
