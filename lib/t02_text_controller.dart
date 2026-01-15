@@ -59,12 +59,7 @@ class _TextFieldWithControllerState extends State<TextFieldWithController> {
           ),
 
           ElevatedButton(
-            onPressed: () {
-              _textController.clear();
-              setState(() {
-                _textInput = "";
-              });
-            },
+            onPressed: () => _textController.clear(),
             child: Text("Clear"),
           ),
           Text("Input: $_textInput"),
