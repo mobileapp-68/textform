@@ -12,38 +12,71 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("Text Form")),
-        body: SimpleTextField(),
+        body: MyForm(),
       ),
     );
   }
 }
 
-class SimpleTextField extends StatefulWidget {
-  const SimpleTextField({super.key});
+class MyForm extends StatefulWidget {
+  const MyForm({super.key});
 
   @override
-  State<SimpleTextField> createState() => _SimpleTextFieldState();
+  State<MyForm> createState() => _MyFormState();
 }
 
-class _SimpleTextFieldState extends State<SimpleTextField> {
-  String _textInput = "";
+class _MyFormState extends State<MyForm> {
+  String _firstname = "";
+  String _lastname = "";
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
-        spacing: 8,
+        spacing: 10,
+        crossAxisAlignment: .start,
         children: [
-          TextField(
-            decoration: const InputDecoration(labelText: "Input Your Name"),
-            onChanged: (value) => {
-              setState(() {
-                _textInput = value;
-              }),
-            },
+          Text(
+            "Fullname: $_firstname $_lastname",
+            style: TextStyle(fontSize: 24, fontWeight: .bold),
           ),
-          Text("Input: $_textInput"),
+          TextField(
+            decoration: const InputDecoration(labelText: "Firstname"),
+            onChanged: (value) => setState(() {
+              _firstname = value;
+            }),
+          ),
+          TextField(
+            decoration: const InputDecoration(labelText: "Lastname"),
+            onChanged: (value) => setState(() {
+              _lastname = value;
+            }),
+          ),
+          Row(
+            spacing: 10,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  if (_firstname.isEmpty || _lastname.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Please fill in all fields")),
+                    );
+                  }
+                },
+                child: Text("Submit"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _firstname = "";
+                    _lastname = "";
+                  });
+                },
+                child: Text("Clear"),
+              ),
+            ],
+          ),
         ],
       ),
     );
